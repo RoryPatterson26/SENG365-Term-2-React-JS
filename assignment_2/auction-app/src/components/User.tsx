@@ -1,9 +1,10 @@
 import React from "react";
 import axios from "axios";
 import EditProfile from "./EditProfile";
+import {useNavigate} from "react-router-dom";
 
 const User = () => {
-
+    const navigate = useNavigate();
     const [userId, setUserId] = React.useState(sessionStorage.getItem("userId"));
     const [userInfo, setUserInfo] = React.useState<userReturnWithEmail>({email: "", firstName: "", lastName: ""});
     const [userToken, setUserToken] = React.useState(sessionStorage.getItem("token"));
@@ -21,10 +22,12 @@ const User = () => {
         if (userId) {
             getUser();
         } else {
-            //redirect to log in
+
+            navigate("../login");
         }
     }
     React.useEffect(() => {
+        isLoggedIn()
         getUser()
     }, [])
     return (

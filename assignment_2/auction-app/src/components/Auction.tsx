@@ -4,6 +4,8 @@ import {Link, useParams} from "react-router-dom";
 import SellerInfo from "./SellerInfo";
 import AuctionBids from "./AuctionBids";
 import PlaceBid from "./PlaceBid";
+import EditAuction from "./EditAuction";
+import DeleteAuction from "./DeleteAuction";
 
 const Auction = () => {
     const {id} = useParams();
@@ -22,6 +24,7 @@ const Auction = () => {
     });
     const [errorFlag, setErrorFlag] = React.useState(false);
     const [errorMessage, setErrorMessage] = React.useState("");
+    const [hasBids, setHasBids] = React.useState(false);
     React.useEffect(() => {
         const getOneAuction = () => {
             axios.get('http://localhost:4941/api/v1/auctions/'+id)
@@ -40,7 +43,22 @@ const Auction = () => {
         const receivedDate = new Date(auction.endDate)
         return receivedDate.toDateString();
     }
-
+    const isSeller = () => {
+        if (auction.sellerId.toString() === sessionStorage.getItem("userId")) {
+            if (!hasBids) {
+                return (
+                    <div className="button-group " role="group">
+                        <EditAuction auctionId={id}/>
+                        <DeleteAuction auctionId={id}/>
+                    </div>)
+            }
+        } else {
+            return (<PlaceBid id={id} highestBid={auction.highestBid}/>)
+        }
+    }
+    const sendChildToParent = (dataFromChild: boolean | ((prevState: boolean) => boolean)) => {
+        setHasBids(dataFromChild);
+    }
     if(errorFlag) {
         return (
             <div>
@@ -57,9 +75,9 @@ const Auction = () => {
                 <img src={'http://localhost:4941/api/v1/auctions/'+ id + "/image"}/>
                 <p>{auction.description}</p>
                 <h3>Auction ends on: &nbsp;{endDate()}</h3>
-                <SellerInfo sellerId={auction.sellerId} sellerFirstName={auction.sellerFirstName} sellerLastName={auction.sellerLastName}/>
-                <PlaceBid id={id} highestBid={auction.highestBid}/>
-                <AuctionBids id={id} />
+                <SellerInfo sellerId={auction.sellerId} sellerFirstName={auction.sellerFirstName} sellerLastName={auction.sellerLastName}/> {isSeller()}
+
+                <AuctionBids id={id} sendChildToParent={sendChildToParent}/>
             </div>
         )
     }

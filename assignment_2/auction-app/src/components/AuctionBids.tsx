@@ -7,16 +7,21 @@ const AuctionBids = (props: any) => {
     const [errorFlag, setErrorFlag] = React.useState(false)
     const [errorMessage, setErrorMessage] = React.useState("")
     const [auctionBids, setAuctionBids] = React.useState<Array<bid>>([])
+
     const getAuctionBids = () => {
         axios.get('http://localhost:4941/api/v1/auctions/'+ props.id.toString() + "/bids")
             .then((response) => {
                 setErrorFlag(false)
                 setErrorMessage("")
                 setAuctionBids(response.data)
+                if (auctionBids.length > 1) {
+                    props.sendChildToParent(true)
+                }
             }, (error) => {
                 setErrorFlag(true)
                 setErrorMessage(error.toString())
             })
+
     }
     React.useEffect(() => {
 
