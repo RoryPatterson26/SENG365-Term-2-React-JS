@@ -8,10 +8,7 @@ const Auctions = (props: any) => {
     const [auctions, setAuctions] = React.useState({"auctions": []});
     const [errorFlag, setErrorFlag] = React.useState(false)
     const [errorMessage, setErrorMessage] = React.useState("")
-
-    React.useEffect(() => {
-        getAuctions()
-    }, [])
+    const [categories, setCategories] = React.useState([{categoryId: 0, name: "unavailable"}]);
 
     const getAuctions = () => {
         axios.get(props.url.toString())
@@ -24,6 +21,30 @@ const Auctions = (props: any) => {
                 setErrorMessage(error.toString())
             })
     };
+    const getCategories = () => {
+        axios({
+                method: "get",
+                url: "http://localhost:4941/api/v1/auctions/categories"
+            }
+        ).then((response) => {
+            setCategories(response.data)
+            setErrorFlag(false)
+            setErrorMessage("")
+        }, (error) => {
+            setErrorFlag(true)
+            setErrorMessage(error.toString())
+        })
+    }
+    React.useEffect(() => {
+        getAuctions();
+        getCategories()
+    }, [])
+
+    const findCategory = (categoryId: number) => {
+        return categories.find(categoryItem => categoryItem.categoryId === categoryId) || {categoryId: 0, name: "unavailable"};
+
+    }
+
     const list_of_auctions = () => {
         // TODO: Add hero image
         return auctions["auctions"].map((item: auction) =>
@@ -31,11 +52,10 @@ const Auctions = (props: any) => {
                 <th scope="row">{item.auctionId}</th>
                 <td><Link to={"/auctions/" + item.auctionId}>{item.title}</Link></td>
                 <td>{item.endDate}</td>
-                <td>{item.categoryId}</td>
+                <td>{findCategory(item.categoryId).name}</td>
                 <td>{item.sellerFirstName} {item.sellerLastName}</td>
                 <td>${item.highestBid || 0}</td>
                 <td>${item.reserve || 0}</td>
-
             </tr>
         )
     };

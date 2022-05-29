@@ -11,8 +11,6 @@ const Login = (props: any) => {
     const [errorMessage, setErrorMessage] = React.useState("");
     const handleSubmit = (event: any) => {
         event.preventDefault();
-        console.log(email);
-        console.log(password);
         axios({
             method: 'post',
             url: "http://localhost:4941/api/v1/users/login",
@@ -25,6 +23,7 @@ const Login = (props: any) => {
             setErrorMessage("")
             setLoggedIn(true);
             sessionStorage.setItem("token", response.data["token"]);
+            sessionStorage.setItem("uerId", response.data["userId"]);
         }, (error) => {
             setErrorFlag(true)
             setErrorMessage(error.toString())
@@ -63,8 +62,7 @@ const Login = (props: any) => {
                     <form onSubmit={(event) => handleSubmit(event)}>
                         <div className="form-group">
                             <label htmlFor="exampleInputEmail1">Email address</label>
-                            <input type="email" className="form-control" id="inputEmail"
-                                   aria-describedby="emailHelp" placeholder="Enter email"
+                            <input type="email" id="inputEmail" placeholder="Enter email"
                                    onChange={(e) => setEmail(e.target.value)}
                                    value={email}/>
 

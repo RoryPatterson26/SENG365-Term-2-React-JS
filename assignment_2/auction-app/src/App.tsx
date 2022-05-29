@@ -14,7 +14,6 @@ import CreateAuction from "./components/CreateAuction";
 import Register from "./components/Register";
 
 function App() {
-    const [token, setToken] = useState();
 
   return (
       <div className="App">
