@@ -23,7 +23,7 @@ const Login = (props: any) => {
             setErrorMessage("")
             setLoggedIn(true);
             sessionStorage.setItem("token", response.data["token"]);
-            sessionStorage.setItem("uerId", response.data["userId"]);
+            sessionStorage.setItem("userId", response.data["userId"]);
         }, (error) => {
             setErrorFlag(true)
             setErrorMessage(error.toString())
@@ -78,6 +78,7 @@ const Login = (props: any) => {
                         </div>
                         <button type="submit" className="btn btn-primary">Log in</button>
                     </form>
+                    <h4>Don't have an account? &nbsp;<Link to={"../register"}>Register!!</Link></h4>
                 </div>
             )
         }

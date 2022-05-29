@@ -89,7 +89,7 @@ const Register = () => {
                                    required={true}/>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="exampleInputPassword1">Password</label>
+                            <label htmlFor="inputPassword">Password</label>
                             <input type={passwordShown ? "text" : "password"} className="form-control" id="inputPassword"
                                    placeholder="Password"
                                    onChange={(e) => setPassword(e.target.value)}

@@ -3,6 +3,7 @@ import React from "react";
 import {Link, useParams} from "react-router-dom";
 import SellerInfo from "./SellerInfo";
 import AuctionBids from "./AuctionBids";
+import PlaceBid from "./PlaceBid";
 
 const Auction = () => {
     const {id} = useParams();
@@ -57,6 +58,7 @@ const Auction = () => {
                 <p>{auction.description}</p>
                 <h3>Auction ends on: &nbsp;{endDate()}</h3>
                 <SellerInfo sellerId={auction.sellerId} sellerFirstName={auction.sellerFirstName} sellerLastName={auction.sellerLastName}/>
+                <PlaceBid id={id} highestBid={auction.highestBid}/>
                 <AuctionBids id={id} />
             </div>
         )

@@ -51,7 +51,7 @@ const Auctions = (props: any) => {
             <tr key={item.auctionId}>
                 <th scope="row">{item.auctionId}</th>
                 <td><Link to={"/auctions/" + item.auctionId}>{item.title}</Link></td>
-                <td>{item.endDate}</td>
+                <td>{new Date(item.endDate).toLocaleString()}</td>
                 <td>{findCategory(item.categoryId).name}</td>
                 <td>{item.sellerFirstName} {item.sellerLastName}</td>
                 <td>${item.highestBid || 0}</td>

@@ -8,3 +8,9 @@ type User = {
     password: string,
     //Profile image
 }
+
+type userReturnWithEmail = {
+    firstName: string,
+    lastName: string,
+    email:string
+}
