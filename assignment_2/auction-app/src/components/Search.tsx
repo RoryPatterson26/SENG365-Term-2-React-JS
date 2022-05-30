@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-//import axios from "axios";
 import Auctions from "./Auctions";
 import axios from "axios";
 const Search = () => {
