@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import axios from "axios";
 import {Button, Modal} from "react-bootstrap";
+import ImageUploader from "./ImageUploader";
 
 const EditAuction = (props: any) => {
     const [show, setShow] = React.useState(false);
@@ -96,6 +97,7 @@ const EditAuction = (props: any) => {
                 </Modal.Header>
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <Modal.Body>
+                        <ImageUploader type={"auctions"} userAuctionId={props.auctionId} />
                             <div className="form-group" id="titleDiv">
                                 <label htmlFor="createTitle">Auction title:</label>
                                 <input type="text" id="createTitle" placeholder="Title..."

@@ -88,6 +88,7 @@ const CreateAuction = () => {
             <div id="createAuctionDiv">
                 <h1>Create an Auction:</h1>
                 <form onSubmit={(event) => handleSubmit(event)}>
+                    <p>If you would like to add a photo you can do this later when editing an auction</p>
                     <div className="form-group" id="titleDiv">
                         <label htmlFor="createTitle">Auction title:</label>
                         <input type="text" id="createTitle" placeholder="Title..."

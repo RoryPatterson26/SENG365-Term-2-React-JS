@@ -2,6 +2,7 @@ import {Button, Modal} from "react-bootstrap";
 import React, {useState} from "react";
 import axios from "axios";
 import {Link} from "react-router-dom";
+import ImageUploader from "./ImageUploader";
 
 
 const EditProfile = (props: any) => {
@@ -42,9 +43,9 @@ const EditProfile = (props: any) => {
         return thing;
     }
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        handleClose()
-        editContents()
+        e.preventDefault();
+        handleClose();
+        editContents();
         axios({
             method: "patch",
             url: "http://localhost:4941/api/v1/users/" + props.userId,
@@ -80,6 +81,7 @@ const EditProfile = (props: any) => {
                 </Modal.Header>
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <Modal.Body>
+                        <ImageUploader type={"users"} userAuctionId={props.userId} />
                         <label htmlFor="editFirstName">First Name</label>
                         <input type="text" className="form-control" id="editFirstName"
                                placeholder="First Name"

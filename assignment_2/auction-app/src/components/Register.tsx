@@ -69,6 +69,7 @@ const Register = () => {
                     <h1>Register</h1>
                     <form onSubmit={event => handleSubmit(event)}>
                         <div className="form-group">
+                            <p>If you would like to add a photo you can do this later when editing your Profile</p>
                             <label htmlFor="inputFirstName">First Name</label>
                             <input type="text" className="form-control" id="inputFirstName"
                                    placeholder="First Name"

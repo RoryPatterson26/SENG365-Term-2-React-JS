@@ -6,6 +6,7 @@ import AuctionBids from "./AuctionBids";
 import PlaceBid from "./PlaceBid";
 import EditAuction from "./EditAuction";
 import DeleteAuction from "./DeleteAuction";
+import Auctions from "./Auctions";
 
 const Auction = () => {
     const {id} = useParams();
@@ -78,6 +79,8 @@ const Auction = () => {
                 <SellerInfo sellerId={auction.sellerId} sellerFirstName={auction.sellerFirstName} sellerLastName={auction.sellerLastName}/> {isSeller()}
 
                 <AuctionBids id={id} sendChildToParent={sendChildToParent}/>
+                <h3>Similar Auctions:</h3>
+                <Auctions url={"http://localhost:4941/api/v1/auctions/"} params={{"categoryIds": auction.categoryId}}/>
             </div>
         )
     }

@@ -69,12 +69,14 @@ const Login = (props: any) => {
                         </div>
                         <div className="form-group">
                             <label htmlFor="exampleInputPassword1">Password</label>
-                            <input type={passwordShown ? "text" : "password"} className="form-control" id="inputPassword"
+                            <input type={passwordShown ? "text" : "password"}  id="inputPassword"
                                    placeholder="Password"
                                    onChange={(e) => setPassword(e.target.value)}
                                    value={password}/>
-                            <input type="checkbox" className="form-check-input" id="passwordCheck" onClick={() => togglePassword()}/>
-                            <label className="form-check-label" htmlFor="exampleCheck1">Show Password</label>
+                            <div>
+                                <input type="checkbox" className="form-check-input" id="passwordCheck" onClick={() => togglePassword()}/>
+                                <label className="form-check-label" htmlFor="exampleCheck1">Show Password</label>
+                            </div>
                         </div>
                         <button type="submit" className="btn btn-primary">Log in</button>
                     </form>

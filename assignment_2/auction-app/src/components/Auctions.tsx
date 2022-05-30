@@ -11,7 +11,11 @@ const Auctions = (props: any) => {
     const [categories, setCategories] = React.useState([{categoryId: 0, name: "unavailable"}]);
 
     const getAuctions = () => {
-        axios.get(props.url.toString())
+        axios( {
+            method: "get",
+            url: props.url,
+            params: props.params
+        })
             .then((response) => {
                 setErrorFlag(false)
                 setErrorMessage("")
@@ -46,10 +50,9 @@ const Auctions = (props: any) => {
     }
 
     const list_of_auctions = () => {
-        // TODO: Add hero image
         return auctions["auctions"].map((item: auction) =>
             <tr key={item.auctionId}>
-                <th scope="row">{item.auctionId}</th>
+                <th scope="row"><img src={"http://localhost:4941/api/v1/auctions/" + item.auctionId + "/image"} width="80" /></th>
                 <td><Link to={"/auctions/" + item.auctionId}>{item.title}</Link></td>
                 <td>{new Date(item.endDate).toLocaleString()}</td>
                 <td>{findCategory(item.categoryId).name}</td>
@@ -71,11 +74,10 @@ const Auctions = (props: any) => {
     } else {
         return (
             <div>
-                <h1>Search Results:</h1>
                 <table className="table">
                     <thead>
                     <tr>
-                        <th scope="col">#</th>
+                        <th scope="col"/>
                         <th scope="col">Title</th>
                         <th scope="col">Closes</th>
                         <th scope="col">Category</th>
