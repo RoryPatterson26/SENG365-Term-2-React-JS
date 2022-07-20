@@ -3,6 +3,7 @@ import React from "react";
 import {Button, Modal, ModalBody} from "react-bootstrap";
 
 const DeleteAuction = (props: any) => {
+    // Provides delete auction functionality to authorised users with a modal to confirm on click
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [show, setShow] = React.useState(false);

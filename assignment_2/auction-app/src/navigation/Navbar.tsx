@@ -1,7 +1,7 @@
 import React from "react";
 import {Button, Modal} from "react-bootstrap";
 const Navbar = () => {
-    // TODO: make profile button go to login page when not logged in
+    // Navigation Bar for site that is on every page so the user can move efficiently around the site
     const [show, setShow] = React.useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -11,9 +11,15 @@ const Navbar = () => {
         sessionStorage.setItem("userId", '');
         handleClose();
     }
-
+    try {
+        const thing = sessionStorage.getItem("token")!.length < 1
+    } catch {
+        sessionStorage.setItem("token", '');
+        sessionStorage.setItem("userId", '');
+    }
     const isLoggedIn = () => {
-        if (sessionStorage.getItem("token")!.length < 1) {
+        // Checking user is logged in so logout can be displayed in navbar instead of login
+        if (sessionStorage.getItem("token")!.length < 1 ) {
             return (<a className="nav-link" href="../login"> Log in </a>)
         } else {
             return (

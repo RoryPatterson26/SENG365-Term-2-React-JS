@@ -9,6 +9,7 @@ import DeleteAuction from "./DeleteAuction";
 import Auctions from "./Auctions";
 
 const Auction = () => {
+    // Parent Component for the Auction page which contains other components for displaying related information
     const {id} = useParams();
     const [auction, setAuction] = React.useState<auctions>({
         auctionId: 0,
@@ -26,6 +27,7 @@ const Auction = () => {
     const [errorFlag, setErrorFlag] = React.useState(false);
     const [errorMessage, setErrorMessage] = React.useState("");
     const [hasBids, setHasBids] = React.useState(false);
+    // Gets the requested auction
     React.useEffect(() => {
         const getOneAuction = () => {
             axios.get('http://localhost:4941/api/v1/auctions/'+id)
@@ -41,11 +43,14 @@ const Auction = () => {
         getOneAuction()
     }, [id])
     const endDate = () => {
+        // Converts date format for display
         const receivedDate = new Date(auction.endDate)
         return receivedDate.toDateString();
     }
     const isSeller = () => {
+        // Verifies if the user viewing the page is the auction seller so that they can't bid but can edit
         if (auction.sellerId.toString() === sessionStorage.getItem("userId")) {
+            // If auction has a bid it can no longer be edited or deleted
             if (!hasBids) {
                 return (
                     <div className="button-group " role="group">
@@ -58,6 +63,7 @@ const Auction = () => {
         }
     }
     const sendChildToParent = (dataFromChild: boolean | ((prevState: boolean) => boolean)) => {
+        //uses the AuctionBids component to determine if the auction has bids so the display can be correct
         setHasBids(dataFromChild);
     }
     if(errorFlag) {

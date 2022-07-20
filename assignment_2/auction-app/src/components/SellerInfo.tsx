@@ -3,8 +3,7 @@ import axios from "axios";
 import {Card} from "react-bootstrap";
 
 const SellerInfo = (props: any) => {
-// TODO: NEEDS REFORMATTING AS MOST CODE IS REDUNDANT
-
+    // Gets info from server so can be displayed on auction page
     const [sellerImage, setSellerImage] = React.useState();
     const [errorFlag, setErrorFlag] = React.useState(false)
     const [errorMessage, setErrorMessage] = React.useState("")

@@ -3,13 +3,13 @@ import axios from "axios";
 import {Link} from 'react-router-dom';
 
 const Auctions = (props: any) => {
-    // TODO: Form for searching auctions
+    // Functional Component For displaying list of auctions according to search parameters
 
     const [auctions, setAuctions] = React.useState({"auctions": []});
     const [errorFlag, setErrorFlag] = React.useState(false)
     const [errorMessage, setErrorMessage] = React.useState("")
     const [categories, setCategories] = React.useState([{categoryId: 0, name: "unavailable"}]);
-
+    // Gets all resources from server that apply to the searched parameters in the parent component
     const getAuctions = () => {
         axios( {
             method: "get",
@@ -21,11 +21,13 @@ const Auctions = (props: any) => {
                 setErrorMessage("")
                 setAuctions(response.data)
             }, (error) => {
+                // Error flags for if get request fails
                 setErrorFlag(true)
                 setErrorMessage(error.toString())
             })
     };
     const getCategories = () => {
+        // Getting Category names as the auctions get request only gives category ID not name
         axios({
                 method: "get",
                 url: "http://localhost:4941/api/v1/auctions/categories"
@@ -45,11 +47,13 @@ const Auctions = (props: any) => {
     }, [])
 
     const findCategory = (categoryId: number) => {
+        // Finds the category name using ID number
         return categories.find(categoryItem => categoryItem.categoryId === categoryId) || {categoryId: 0, name: "unavailable"};
 
     }
 
     const list_of_auctions = () => {
+        // Creates table body from search results
         return auctions["auctions"].map((item: auction) =>
             <tr key={item.auctionId}>
                 <th scope="row"><img src={"http://localhost:4941/api/v1/auctions/" + item.auctionId + "/image"} width="80" /></th>

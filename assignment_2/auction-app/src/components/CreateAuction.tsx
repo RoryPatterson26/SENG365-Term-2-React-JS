@@ -3,7 +3,7 @@ import axios from "axios";
 import {Link} from "react-router-dom";
 
 const CreateAuction = () => {
-    // TODO: add create functionality form with all needed inputs
+    // States needed for acquiring info needed for creating auction
     const [title, setTitle] = React.useState('');
     const [description, setDescription] = React.useState('');
     const [categories, setCategories] = React.useState([{categoryId: 0, name: "unavailable"}]);
@@ -16,6 +16,7 @@ const CreateAuction = () => {
     const [successful, setSuccessful] = React.useState(0);
 
     const getCategories = () => {
+        // gets categories so that the name can be displayed instead of the number
         axios({
             method: "get",
             url: "http://localhost:4941/api/v1/auctions/categories"
@@ -31,13 +32,16 @@ const CreateAuction = () => {
         getCategories()
     }, [])
     const categorySelect = () => {
+        // Options for category dropdown as user can not create their own
         return categories.map((item: category) =>
             <option key={item.categoryId} value={item.categoryId} selected={item.categoryId === 1}>{item.name}</option>
         )
     };
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        // Submits JSON with information to the server
         event.preventDefault()
+        // sets reserve default
         if (parseInt(reserve, 10) < 1 || reserve === '') {
             setReserve('1')
         }

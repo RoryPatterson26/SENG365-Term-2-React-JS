@@ -5,11 +5,13 @@ import {useNavigate} from "react-router-dom";
 import Auctions from "./Auctions";
 
 const User = () => {
+    // User information page only visible to currently logged in user
     const navigate = useNavigate();
     const [userId, setUserId] = React.useState(sessionStorage.getItem("userId"));
     const [userInfo, setUserInfo] = React.useState<userReturnWithEmail>({email: "", firstName: "", lastName: ""});
     const [userToken, setUserToken] = React.useState(sessionStorage.getItem("token"));
     const getUser = () => {
+        // Retrieves the users' information from the server
         axios({
             method: "get",
             url: "http://localhost:4941/api/v1/users/" + userId,
@@ -20,6 +22,7 @@ const User = () => {
     }
 
     const isLoggedIn = () => {
+        // first verifies that a user is logged in before displaying the users page
         if (userId) {
             getUser();
         } else {

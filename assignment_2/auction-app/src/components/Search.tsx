@@ -2,11 +2,12 @@ import React, {useState} from "react";
 import Auctions from "./Auctions";
 import axios from "axios";
 const Search = () => {
+    // So user can search for auctions
     const [search, setSearch] = useState('');
     const [url, setUrl] = React.useState("http://localhost:4941/api/v1/auctions");
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [sort, setSort] = useState('CLOSING_SOON');
-    const [categories, setCategories] = React.useState([{categoryId: 0, name: "unavailable"}]);
+    const [categories, setCategories] = React.useState([{categoryId: 0, name: "unavailable"}]); // Sets default as unavailable in case API query fails
     const [chosenCategory, setChosenCategory] = React.useState("0");
     const [status, setStatus] = React.useState("ANY");
     const handleSubmit = (event: any) => {
@@ -45,6 +46,7 @@ const Search = () => {
             )
         }
         return (
+            // Sends search parameters to Auctions component so they can be retrieved and displayed
             <div>
                 <h1>Search Results:</h1>
                 <Auctions url={url} params={{"q": search, "status": status, "sortBy": sort, "categoryIds": chosenCategory}}/>
