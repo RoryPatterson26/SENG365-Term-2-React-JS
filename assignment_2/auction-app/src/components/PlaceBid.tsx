@@ -3,6 +3,7 @@ import React from "react";
 import axios from "axios";
 
 const PlaceBid = (props: any) => {
+    // Allows user to place bid on auction assuming the bid is valid and before auction has ended
     const [amount, setAmount] = React.useState("0");
     const [errorFlag, setErrorFlag] = React.useState(false);
     const [errorMessage, setErrorMessage] = React.useState("");

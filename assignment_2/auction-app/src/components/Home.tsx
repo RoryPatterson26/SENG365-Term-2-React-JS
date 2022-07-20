@@ -2,6 +2,7 @@ import {Link} from "react-router-dom";
 import Search from "./Search";
 
 const Home = () => {
+    // Home page. Could be updated to include featured auctions or a basic search bar for auctions
     return (
         <div>
             <h1>Trade You</h1>

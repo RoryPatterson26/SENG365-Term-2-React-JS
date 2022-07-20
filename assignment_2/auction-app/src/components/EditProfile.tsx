@@ -6,6 +6,7 @@ import ImageUploader from "./ImageUploader";
 
 
 const EditProfile = (props: any) => {
+    // Allows user to change their profile information
     const [show, setShow] = React.useState(false);
     const [email, setEmail] = useState<string>('');
     const [newPassword, setNewPassword] = useState<string>('');
@@ -22,25 +23,26 @@ const EditProfile = (props: any) => {
 
     const togglePassword = () => {
         // When the handler is invoked
-        // inverse the boolean state of passwordShown
+        // invert the boolean state of passwordShown
         setPasswordShown(!passwordShown);
     };
     const editContents = () => {
-        let thing: any = {};
+        // Ensures only required information is sent to API as well as being in correct format
+        let content: any = {};
         if (firstName.length > 0) {
-            thing["firstName"] = firstName;
+            content["firstName"] = firstName;
         }
         if (lastName.length > 0) {
-            thing["lastName"] = lastName;
+            content["lastName"] = lastName;
         }
         if (email.length > 0) {
-            thing["email"] = email;
+            content["email"] = email;
         }
         if (newPassword.length > 0) {
-            thing["password"] = newPassword
-            thing["currentPassword"] = currentPassword
+            content["password"] = newPassword
+            content["currentPassword"] = currentPassword
         }
-        return thing;
+        return content;
     }
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();

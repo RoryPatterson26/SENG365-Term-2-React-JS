@@ -4,6 +4,9 @@ import {Button, Modal} from "react-bootstrap";
 import ImageUploader from "./ImageUploader";
 
 const EditAuction = (props: any) => {
+    // Edit auctions details. Very similar to create auction as all the same information can be changed
+    // Uses a Modal to contain the info as it is over the auction page
+    // Probably could have optimised by having a single component with all the fields and two smaller ones for headers and such
     const [show, setShow] = React.useState(false);
     const [title, setTitle] = React.useState('');
     const [description, setDescription] = React.useState('');
@@ -40,23 +43,24 @@ const EditAuction = (props: any) => {
     };
 
     const editContents = () => {
-        let thing: any = {};
+        // Creates list in JSON format so can be read by API and makes sure only edited fields are sent to API
+        let content: any = {};
         if (title.length > 0) {
-            thing["title"] = title;
+            content["title"] = title;
         }
         if (description.length > 0) {
-            thing["description"] = description;
+            content["description"] = description;
         }
         if (reserve.length > 0) {
-            thing["reserve"] = reserve;
+            content["reserve"] = reserve;
         }
         if (endDate.length > 0) {
-            thing["endDate"] = endDate
+            content["endDate"] = endDate
         }
         if (chosenCategory) {
-            thing["category"] = parseInt(chosenCategory)
+            content["category"] = parseInt(chosenCategory)
         }
-        return thing;
+        return content;
     }
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()

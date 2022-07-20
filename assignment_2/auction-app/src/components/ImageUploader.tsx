@@ -3,6 +3,7 @@ import axios from "axios";
 
 
 const ImageUploader = (props: any) => {
+    // Small widget for users to upload images to an auction or their profile.
     const [image, setImage] = React.useState<any>();
     const [success, setSuccess] = React.useState(false);
     const [contentType, setContentType] = React.useState('')

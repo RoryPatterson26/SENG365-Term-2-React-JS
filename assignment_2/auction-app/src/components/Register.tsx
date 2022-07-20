@@ -3,7 +3,7 @@ import axios from "axios";
 import {Link} from "react-router-dom";
 
 const Register = () => {
-    // TODO: add picture support
+    // Allows users to register an account. Needs to be updated so the user can add a picture at this stage
     const [passwordShown, setPasswordShown] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -41,6 +41,7 @@ const Register = () => {
     };
 
     const reset = (event: any) => {
+        // Resets the page when a user fails to register due to invalid information (account already exists) or server failure
         event.preventDefault();
         setErrorFlag(false);
     }

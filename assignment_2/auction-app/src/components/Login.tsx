@@ -3,6 +3,7 @@ import axios from "axios";
 import {Link} from "react-router-dom";
 
 const Login = (props: any) => {
+    // A login page for the site also prompts users to search auctions once logged in
     const [passwordShown, setPasswordShown] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -22,6 +23,7 @@ const Login = (props: any) => {
             setErrorFlag(false)
             setErrorMessage("")
             setLoggedIn(true);
+            // Stores token and userId, so they can be accessed globally within the program without a web of states
             sessionStorage.setItem("token", response.data["token"]);
             sessionStorage.setItem("userId", response.data["userId"]);
         }, (error) => {
@@ -31,7 +33,7 @@ const Login = (props: any) => {
     };
     const togglePassword = () => {
         // When the handler is invoked
-        // inverse the boolean state of passwordShown
+        // invert the boolean state of passwordShown
         setPasswordShown(!passwordShown);
     };
     const reset = (event: any) => {
@@ -47,6 +49,7 @@ const Login = (props: any) => {
     } else {
         if (errorFlag) {
             return (
+                // Failure to login allows user to try again
                 <div>
                     <h1>Error</h1>
                     <div style={{color: "red"}}>
